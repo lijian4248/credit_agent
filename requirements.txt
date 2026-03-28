@@ -1,0 +1,38 @@
+# ========== 基础 ==========
+python-dotenv>=1.0.0
+setuptools>=68.0.0
+
+# ========== Web 服务 ==========
+fastapi>=0.104.1
+uvicorn>=0.24.0
+pydantic>=2.4.0
+
+# ========== RAG 核心（BGE 全套）==========
+langchain>=0.1.10
+langchain-community>=0.0.25
+faiss-cpu>=1.7.4
+sentence-transformers>=2.5.1   # BGE 必须依赖
+jieba>=0.42.1
+rank-bm25>=0.2.2              # 混合检索
+
+# ========== BGE 模型依赖 ==========
+transformers>=4.37.0
+torch>=2.1.0
+accelerate>=0.26.0
+peft>=0.7.0
+
+# ========== 数据处理 ==========
+numpy>=1.24.0
+pandas>=2.1.0
+pymupdf>=1.23.10
+
+# ========== 大模型 ==========
+zai-sdk
+
+langchain langchainhub httpx_sse
+langchain-openai
+openai
+volcengine-python-sdk[ark]
+
+rank-bm25 
+langchain-reranks
