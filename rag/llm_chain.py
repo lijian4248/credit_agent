@@ -1,13 +1,12 @@
-from config.config import RAG_CONFIG
 from config.prompt_config import RAG_PROMPT
-from langchain_core.prompts import PromptTemplate
 from config.config import LLM_CONFIG
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
-from volcenginesdkarkruntime import Ark
-from langchain_community.llms import volcengine_maas
+from models.schemas import CreditReport  # 引入第一步定义的数据模型
+from langchain_core.output_parsers import PydanticOutputParser # 引入 Pydantic 解析器
+from config.prompt_config import analysis_prompt, JSON_FORMAT_INSTRUCTIONS
 
 # 读取配置
 API_KEY = LLM_CONFIG["API_KEY"]
@@ -51,3 +50,29 @@ def build_rag_chain(retriever):
   
   
     return rag_chain
+
+
+def build_analysis_chain():
+    """
+    构建信贷分析链。
+    
+    该链的工作流程：
+    1. 接收输入（规则、用户资料、格式说明）。
+    2. 通过 analysis_prompt 格式化为提示词。
+    3. 发送给 LLM 进行推理。
+    4. 使用 PydanticOutputParser 将输出解析为 CreditReport 对象。
+    
+    Returns:
+        LangChain Chain 对象
+    """
+    
+    # 1. 初始化 Pydantic 解析器，绑定 CreditReport 模型
+    # 解析器会自动根据 CreditReport 的字段生成 JSON 格式说明
+    parser = PydanticOutputParser(pydantic_object=CreditReport)
+    
+    llm = get_llm()
+    
+    
+    chain = analysis_prompt | llm | parser
+    
+    return chain

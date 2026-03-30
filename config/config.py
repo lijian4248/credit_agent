@@ -27,7 +27,7 @@ LLM_CONFIG = {
     "API_KEY": "9b630547-378d-4fd3-8542-ef4bb152d0f1",
     # "BASE_URL": "https://open.bigmodel.cn/api/paas/v4/",
     "BASE_URL": "https://ark.cn-beijing.volces.com/api/v3",
-    "MODEL_NAME": "doubao-seed-2-0-pro-260215",
+    "MODEL_NAME": "doubao-seed-2-0-code-preview-260215",
     "TEMPERATURE": 0.1,
     "MAX_TOKENS": 2048
     
